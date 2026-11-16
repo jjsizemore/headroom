@@ -28,7 +28,7 @@ env:
 
 jobs:
   triage:
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 10
     steps:
       - name: Ensure security label exists

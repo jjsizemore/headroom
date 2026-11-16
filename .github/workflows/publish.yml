@@ -10,7 +10,7 @@ on:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     environment: pypi
     permissions:
       id-token: write  # For trusted publishing

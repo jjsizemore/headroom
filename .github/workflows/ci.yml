@@ -39,7 +39,7 @@ env:
 
 jobs:
   changes:
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 5
     outputs:
       code: ${{ steps.filter.outputs.code }}
@@ -103,7 +103,7 @@ jobs:
   lint:
     needs: changes
     if: needs.changes.outputs.code == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -130,7 +130,7 @@ jobs:
   build-wheel:
     needs: changes
     if: needs.changes.outputs.code == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
@@ -242,7 +242,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os == 'ubuntu-latest' && 'ubicloud-standard-4' || matrix.os }}
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v7
@@ -308,7 +308,7 @@ jobs:
   prefetch-model:
     needs: changes
     if: needs.changes.outputs.code == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 20
     steps:
       - uses: actions/setup-python@v7
@@ -336,7 +336,7 @@ jobs:
   test:
     needs: [changes, build-wheel, prefetch-model]
     if: needs.changes.outputs.code == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 30
     strategy:
       fail-fast: false
@@ -441,7 +441,7 @@ jobs:
   test-extras:
     needs: [changes, build-wheel]
     if: needs.changes.outputs.code == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
@@ -502,7 +502,7 @@ jobs:
   test-agno:
     needs: [changes, build-wheel]
     if: needs.changes.outputs.code == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
@@ -528,7 +528,7 @@ jobs:
   test-dashboard-ui:
     needs: [changes, build-wheel]
     if: needs.changes.outputs.dashboard == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
@@ -569,7 +569,7 @@ jobs:
 
   commitlint:
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7
@@ -582,7 +582,7 @@ jobs:
   build:
     needs: changes
     if: needs.changes.outputs.code == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
@@ -617,7 +617,7 @@ jobs:
   workflow-validation:
     needs: changes
     if: needs.changes.outputs.workflows == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -650,7 +650,7 @@ jobs:
   docker-native-e2e:
     needs: changes
     if: needs.changes.outputs.native == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v7
