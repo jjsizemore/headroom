@@ -36,7 +36,7 @@ permissions:
 
 jobs:
   docker-init-e2e:
-    runs-on: ubuntu-latest
+    runs-on: ubicloud-standard-4
     timeout-minutes: 45
 
     steps:

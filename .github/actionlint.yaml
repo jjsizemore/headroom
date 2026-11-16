@@ -1,0 +1,5 @@
+# Explicit labels used by the compatible Linux CI migration.
+self-hosted-runner:
+  labels:
+    - ubicloud-standard-4
+    - ubicloud-standard-8-arm
